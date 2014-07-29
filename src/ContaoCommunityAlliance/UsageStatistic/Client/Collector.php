@@ -270,14 +270,20 @@ class Collector
 			if (is_array($installed)) {
 				foreach ($installed as $package) {
 					if (is_array($package)) {
+						$version = $package['version'];
+						$source  = $package['installation-source'];
+
+						if (preg_match('~(^dev-|-dev$)~', $version)) {
+							$version .= '#' . $package[$source]['reference'];
+						}
 
 						$event->set(
 							'installed.package.' . $package['name'] . '.version',
-							$package['version']
+							$version
 						);
 						$event->set(
 							'installed.package.' . $package['name'] . '.installation-source',
-							$package['installation-source']
+							$source
 						);
 					}
 				}
