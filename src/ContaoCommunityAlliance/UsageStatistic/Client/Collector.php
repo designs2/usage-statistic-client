@@ -132,16 +132,20 @@ class Collector
 	{
 		try {
 			// build the request body
-			$body           = new \stdClass();
-			$body->id       = $id;
-			$body->data     = $data;
+			$body       = new \stdClass();
+			$body->id   = $id;
+			$body->data = $data;
 
 			// encode the request body
 			$body = json_encode($body);
 
 			// send the data
-			$client  = new Client('https://statistics.c-c-a.org/collect');
-			$request = $client->put(null, null, $body);
+			$client  = new Client();
+			$request = $client->put(
+				'http://statistic.c-c-a.org/collect',
+				null,
+				$body
+			);
 			$request->send();
 		}
 		catch (\Exception $e) {
