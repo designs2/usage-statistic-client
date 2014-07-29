@@ -18,9 +18,9 @@ class Collector
 		return array(
 			CronEvents::DAILY             => 'run',
 			CollectorEvents::COLLECT_DATA => array(
-				'collectContaoVersion',
-				'collectExtensionRepository2Packages',
-				'collectComposerPackages',
+				array('collectContaoVersion'),
+				array('collectExtensionRepository2Packages'),
+				array('collectComposerPackages'),
 			),
 		);
 	}
