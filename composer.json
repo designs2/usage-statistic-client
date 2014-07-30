@@ -26,9 +26,13 @@
 		"contao-community-alliance/events-cron": "~1.0",
 		"guzzle/guzzle": "~3.0"
 	},
+	"require-dev": {
+		"phpunit/phpunit": "~3.7"
+	},
 	"autoload": {
 		"psr-0": {
-			"ContaoCommunityAlliance\\UsageStatistic\\Client": "src"
+			"ContaoCommunityAlliance\\UsageStatistic\\Client": "src",
+			"ContaoCommunityAlliance\\UsageStatistic\\Client\\Test": "test"
 		}
 	},
 	"extra":{
