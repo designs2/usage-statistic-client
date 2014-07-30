@@ -281,10 +281,13 @@ class Collector
 							'installed.package.' . $package['name'] . '.version',
 							$version
 						);
-						$event->set(
-							'installed.package.' . $package['name'] . '.installation-source',
-							$source
-						);
+
+						if ($package['type'] !== 'metapackage') {
+							$event->set(
+								'installed.package.' . $package['name'] . '.installation-source',
+								$source
+							);
+						}
 					}
 				}
 			}
