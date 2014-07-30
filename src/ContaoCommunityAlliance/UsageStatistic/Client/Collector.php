@@ -68,8 +68,8 @@ class Collector
 		}
 
 		// IPv6
-		if (preg_match('~^([0-9a-f]{4}):~', $_SERVER['SERVER_ADDR'], $matches)) {
-			$addr = hexdec($matches[0]);
+		if (preg_match('~^([0-9a-f]{1,4})(:[0-9a-f]{0,4}){1,7}$~', $_SERVER['SERVER_ADDR'], $matches)) {
+			$addr = hexdec($matches[1]);
 
 			if (
 				// link local
