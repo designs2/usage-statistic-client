@@ -49,17 +49,17 @@ class Collector
 
 		// IPv4
 		if (preg_match('~^(\d{1,3})\.(\d{1,3})\.(\d{1,3})\.(\d{1,3})$~', $_SERVER['SERVER_ADDR'], $matches)) {
-			$addr = str_pad($matches[0], 3, '0', STR_PAD_LEFT) . str_pad($matches[1], 3, '0', STR_PAD_LEFT);
+			$addr = hexdec(str_pad(dechex($matches[1]), 2, '0', STR_PAD_LEFT) . str_pad(dechex($matches[2]), 2, '0', STR_PAD_LEFT));
 
 			if (
 				// localhost
-				$addr & 0xff00 == 0x7f00 ||
+				($addr & 0xff00) === 0x7f00 ||
 				// class A private networks
-				$addr & 0xff00 == 0x0a00 ||
+				($addr & 0xff00) === 0x0a00 ||
 				// class B private network
-				$addr & 0xfff0 == 0xac10 ||
+				($addr & 0xfff0) === 0xac10 ||
 				// class C private network
-				$addr & 0xffff == 0xc0a8
+				($addr & 0xffff) === 0xc0a8
 			) {
 				return false;
 			}
@@ -73,11 +73,11 @@ class Collector
 
 			if (
 				// link local
-				$addr & 0xffc0 === 0xfe80 ||
+				($addr & 0xffc0) === 0xfe80 ||
 				// site local unicast
-				$addr & 0xffc0 === 0xfec0 ||
+				($addr & 0xffc0) === 0xfec0 ||
 				// unique local unicast
-				$addr & 0xfe00 === 0xfc00
+				($addr & 0xfe00) === 0xfc00
 			) {
 				return false;
 			}
