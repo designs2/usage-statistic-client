@@ -47,45 +47,7 @@ class Collector
 			return false;
 		}
 
-		// IPv4
-		if (preg_match('~^(\d{1,3})\.(\d{1,3})\.(\d{1,3})\.(\d{1,3})$~', $_SERVER['SERVER_ADDR'], $matches)) {
-			$addr = hexdec(str_pad(dechex($matches[1]), 2, '0', STR_PAD_LEFT) . str_pad(dechex($matches[2]), 2, '0', STR_PAD_LEFT));
-
-			if (
-				// localhost
-				($addr & 0xff00) === 0x7f00 ||
-				// class A private networks
-				($addr & 0xff00) === 0x0a00 ||
-				// class B private network
-				($addr & 0xfff0) === 0xac10 ||
-				// class C private network
-				($addr & 0xffff) === 0xc0a8
-			) {
-				return false;
-			}
-
-			return true;
-		}
-
-		// IPv6
-		if (preg_match('~^([0-9a-f]{1,4})(:[0-9a-f]{0,4}){1,7}$~', $_SERVER['SERVER_ADDR'], $matches)) {
-			$addr = hexdec($matches[1]);
-
-			if (
-				// link local
-				($addr & 0xffc0) === 0xfe80 ||
-				// site local unicast
-				($addr & 0xffc0) === 0xfec0 ||
-				// unique local unicast
-				($addr & 0xfe00) === 0xfc00
-			) {
-				return false;
-			}
-
-			return true;
-		}
-
-		return false;
+		return true;
 	}
 
 	/**
