@@ -93,7 +93,7 @@ class Collector
 	 *
 	 * @return string
 	 */
-	protected function getInstallationId()
+	public function getInstallationId()
 	{
 		// Parameters used in the installation ID
 		$parameters = array(
