@@ -97,8 +97,12 @@ class Collector
 	{
 		// Parameters used in the installation ID
 		$parameters = array(
+			// host name is unique for one machine, even the machine have multiple IPs
 			gethostname(),
-			TL_ROOT
+			// the installation path can only hold ONE installation ;-)
+			TL_ROOT,
+			// add more uniqueness, the encryption key should be differ in each installation
+			$GLOBALS['TL_CONFIG']['encryptionKey']
 		);
 
 		// return an ID hash
