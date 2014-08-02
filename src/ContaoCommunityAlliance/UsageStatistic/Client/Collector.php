@@ -32,6 +32,7 @@ class Collector
 	 */
 	protected function checkInstallation()
 	{
+		// if encryption key is empty, the installation is not set up yet
 		return !empty($GLOBALS['TL_CONFIG']['encryptionKey']);
 	}
 
@@ -42,7 +43,7 @@ class Collector
 	 */
 	protected function checkServerAddress()
 	{
-		// Address is missing (e.g. cli mode)
+		// ip address is missing (e.g. cli mode)
 		if (empty($_SERVER['SERVER_ADDR'])) {
 			return false;
 		}
