@@ -236,7 +236,7 @@ class Collector
 
 			if (is_array($installed)) {
 				foreach ($installed as $package) {
-					if (is_array($package)) {
+					if (is_array($package) && !empty($package['license']) && $package['license'] != 'proprietary') {
 						$version = $package['version'];
 						$source  = $package['installation-source'];
 
