@@ -236,7 +236,16 @@ class Collector
 
 			if (is_array($installed)) {
 				foreach ($installed as $package) {
-					if (is_array($package)) {
+					if (
+						is_array($package) &&
+						(
+							// do not track proprietary packages ...
+							!empty($package['license']) && $package['license'] != 'proprietary' ||
+							// ... unless the extension allow us to track
+							isset($package['extra']['contao']['usage-statistic']) &&
+							true === $package['extra']['contao']['usage-statistic']
+						)
+					) {
 						$version = $package['version'];
 						$source  = $package['installation-source'];
 
