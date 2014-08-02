@@ -99,9 +99,9 @@ class CollectorTest
 	}
 
 	/**
-	 * @covers ContaoCommunityAlliance\UsageStatistic\Client\Collector::generateInstallationId
+	 * @covers ContaoCommunityAlliance\UsageStatistic\Client\Collector::getInstallationId
 	 */
-	public function generateInstallationId()
+	public function testGetInstallationId()
 	{
 
 	}

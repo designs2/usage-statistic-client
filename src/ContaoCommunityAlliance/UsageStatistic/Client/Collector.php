@@ -93,7 +93,7 @@ class Collector
 	 *
 	 * @return string
 	 */
-	protected function generateInstallationId()
+	protected function getInstallationId()
 	{
 		// Parameters used in the installation ID
 		$parameters = array(
@@ -169,7 +169,7 @@ class Collector
 			return;
 		}
 
-		$id   = $this->generateInstallationId();
+		$id   = $this->getInstallationId();
 		$data = $this->collect();
 		$this->send($id, $data);
 	}
