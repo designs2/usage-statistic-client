@@ -148,7 +148,7 @@ class Collector
 	 */
 	public function collectContaoVersion(CollectDataEvent $event)
 	{
-		$event->set('contao.version', VERSION . '.' . BUILD);
+		$event->set('contao/contao/version', VERSION . '.' . BUILD);
 	}
 
 	/**
@@ -166,55 +166,44 @@ class Collector
 				in_array('repository', \Config::getInstance()->getActiveModules())
 			)
 		) {
-			$resultSet = $database->query('SELECT * FROM tl_repository_installs');
+			$resultSet = $database->query('SELECT * FROM tl_repository_installs WHERE lickey=""');
 
 			while ($resultSet->next()) {
 				$version = $resultSet->version;
 				$status  = $version % 10;
 				$version = (int) ($version / 10);
-				$micro   = $version % 1000;
+				$patch   = $version % 1000;
 				$version = (int) ($version / 1000);
 				$minor   = $version % 1000;
 				$major   = (int) ($version / 1000);
+				$build   = ($status * 1000) + ((int) $resultSet->build);
 
 				switch ($status) {
 					case 0:
-						$status = 'alpha1';
-						break;
 					case 1:
-						$status = 'alpha2';
-						break;
 					case 2:
-						$status = 'alpha3';
+						$status = '-alpha';
 						break;
 					case 3:
-						$status = 'beta1';
-						break;
 					case 4:
-						$status = 'beta2';
-						break;
 					case 5:
-						$status = 'beta3';
+						$status = '-beta';
 						break;
 					case 6:
-						$status = 'RC1';
-						break;
 					case 7:
-						$status = 'RC2';
-						break;
 					case 8:
-						$status = 'RC3';
+						$status = '-RC';
 						break;
-					case 0:
-						$status = 'stable';
+					case 9:
+						$status = ''; // stable
 						break;
 					default:
-						$status = 'dev';
+						$status = '-dev';
 				}
 
 				$event->set(
-					'installed.extension.' . $resultSet->extension . '.version',
-					$major . '.' . $minor . '.' . $micro . '.' . $resultSet->build . '-' . $status
+					'contao-legacy/' . strtolower($resultSet->extension) . '/version',
+					$major . '.' . $minor . '.' . $patch . '.' . $build . $status
 				);
 			}
 		}
@@ -253,17 +242,15 @@ class Collector
 							$version .= '#' . $package[$source]['reference'];
 						}
 
+						// use vendor "virtual" for non-vendor packages
+						if (strpos($package['name'], '/') === false) {
+							$package['name'] = 'virtual/' . $package['name'];
+						}
+
 						$event->set(
-							'installed.package.' . $package['name'] . '.version',
+							$package['name'] . '/version',
 							$version
 						);
-
-						if ($package['type'] !== 'metapackage') {
-							$event->set(
-								'installed.package.' . $package['name'] . '.installation-source',
-								$source
-							);
-						}
 					}
 				}
 			}
