@@ -1,7 +1,11 @@
-<?xml version="1.0"?>
-<project name="Contao Usage Statistics Client" default="test">
-	<target name="phpunit">
-		<exec dir="${basedir}" executable="vendor/bin/phpunit" failonerror="true" />
-	</target>
-	<target name="test" depends="phpunit"/>
+<?xml version="1.0" encoding="UTF-8"?>
+<!--
+ This project is using the Contao Community Alliance Build System (CCABS)
+
+ For documentation visit:
+   https://github.com/contao-community-alliance/build-system
+
+-->
+<project name="composer plugin" default="build">
+    <import file="vendor/contao-community-alliance/build-system/ccabs.main.xml" />
 </project>

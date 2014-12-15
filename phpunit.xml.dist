@@ -9,11 +9,11 @@
          processIsolation="false"
          stopOnFailure="false"
          syntaxCheck="false"
-         bootstrap="test/bootstrap.php"
+         bootstrap="tests/bootstrap.php"
 >
     <testsuites>
         <testsuite name="ContaoCommunityAlliance UsageStatistic Client Test Suite">
-            <directory>./test/ContaoCommunityAlliance/UsageStatistic/Client/Test/</directory>
+            <directory>./tests/</directory>
         </testsuite>
     </testsuites>
 
@@ -25,7 +25,7 @@
 
     <filter>
         <whitelist>
-            <directory>./src/ContaoCommunityAlliance/UsageStatistic/Client/</directory>
+            <directory>./src/</directory>
         </whitelist>
     </filter>
 </phpunit>
