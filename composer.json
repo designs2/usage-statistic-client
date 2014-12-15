@@ -23,7 +23,7 @@
         "source": "https://github.com/contao-community-alliance/usage-statistic-client"
     },
     "require": {
-        "php": ">=5.3",
+        "php": ">=5.4",
         "contao/core": ">=2.11,<4.0",
         "contao-community-alliance/composer-plugin": "~2.0",
         "contao-community-alliance/event-dispatcher": "~1.3",
