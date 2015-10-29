@@ -1,5 +1,5 @@
 {
-	"name":"contao-community-alliance/usage-statistic-client",
+	"name":"designs2/usage-statistic-client",
 	"description":"Contao usage statistics client",
 	"keywords":["usage", "statistic", "contao"],
 	"type":"contao-module",
@@ -16,7 +16,7 @@
 	"support":{
 			"issues":"https://github.com/contao-community-alliance/usage-statistic-client/issues",
 			"irc":"irc://irc.freenode.org/contao.dev",
-			"source":"https://github.com/contao-community-alliance/usage-statistic-client"
+			"source":"https://github.com/designs2/usage-statistic-client"
 	},
 	"require": {
 		"php":">=5.3",
